@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfDemosCommonCode.ImageProcessingWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vsui="clr-namespace:Vintasoft.Imaging.Wpf.UI;assembly=Vintasoft.Imaging.Wpf.UI"
+    xmlns:DemosCommonCode="clr-namespace:WpfDemosCommonCode"
+    xmlns:ImagingDemosCommonCode="clr-namespace:WpfDemosCommonCode.Imaging"
+    Title="Image Processing" 
+    Width="600" Height="500"
+    MinWidth="404" MinHeight="440">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="186*" />
+            <RowDefinition Height="29" />
+        </Grid.RowDefinitions>
+
+        <ImagingDemosCommonCode:ImageViewerToolBar x:Name="imageViewerToolStrip1" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" CanOpenFile="False" CanPrint="False" CanSaveFile="False" PrintButtonEnabled="False" SaveButtonEnabled="False" />
+
+        <GroupBox Grid.Row="1" Grid.Column="0">
+            <GroupBox.Header>
+                <CheckBox Name="enableImageProcessingCheckBox" Checked="enableImageProcessingCheckBox_CheckedChanged" Unchecked="enableImageProcessingCheckBox_CheckedChanged">Enable Image Processing</CheckBox>
+            </GroupBox.Header>
+            <DemosCommonCode:ImageProcessingCommandSelectionControl IsEnabled="False" x:Name="imageProcessingCommandSelectionControl1" ProcessingCommandsChanged="imageProcessingCommandsEditor1_ProcessingCommandsChanged"/>
+        </GroupBox>
+
+        <Border Grid.Row="1" Grid.Column="1" Margin="3" BorderBrush="Black" BorderThickness="1">
+            <vsui:WpfImageViewer x:Name="imageViewer1" />
+        </Border>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="okButton" Width="75" Height="23" Margin="3" IsDefault="True" Click="okButton_Click">OK</Button>
+            <Button Name="buttonCancel" Width="75" Height="23" Margin="3" IsCancel="True">Cancel</Button>
+        </StackPanel>
+
+        <ProgressBar x:Name="processImageProgressBar" Grid.Row="2" Grid.Column="0" Height="23" Width="100" VerticalAlignment="Bottom" Margin="3" HorizontalAlignment="Left" Visibility="Hidden" Minimum="0" Maximum="100" />
+    </Grid>
+</Window>

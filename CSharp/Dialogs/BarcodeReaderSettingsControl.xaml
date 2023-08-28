@@ -1,0 +1,218 @@
+﻿<UserControl x:Class="WpfFormsProcessingDemo.BarcodeReaderSettingsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto">
+    
+    <UserControl.Resources>
+        <Style x:Key="BarcodeTypeCheckBoxStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="Height" Value="16" />
+        </Style>
+
+        <Style x:Key="BarcodeTypeLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="352" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <GroupBox Header="Expected barcodes" Name="groupBox2" Height="85" Width="140">
+                <DockPanel Name="dockPanel14">
+                    <DockPanel Name="dockPanel16" Height="36" DockPanel.Dock="Top">
+                        <Slider Name="trackBarExpectedBarcodes" ValueChanged="trackBarExpectedBarcodes_ValueChanged" Height="24" Maximum="40" Minimum="1" SmallChange="1" Value="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="False" />
+                    </DockPanel>
+                    <DockPanel Name="dockPanel17">
+                        <Label Name="labelExpectedBarcodes" HorizontalAlignment="Center" Width="25">1</Label>
+                    </DockPanel>
+                </DockPanel>
+            </GroupBox>
+            <GroupBox Header="Scan interval" Height="85" Name="groupBox3" Width="140">
+                <DockPanel Name="dockPanel20">
+                    <DockPanel DockPanel.Dock="Top" Height="36" Name="dockPanel22">
+                        <Slider Height="24" ValueChanged="trackBarScanInterval_ValueChanged" IsSelectionRangeEnabled="False" IsSnapToTickEnabled="True" Maximum="25" Minimum="1" Name="trackBarScanInterval" SmallChange="1" TickPlacement="BottomRight" Value="5" />
+                    </DockPanel>
+                    <DockPanel Name="dockPanel23">
+                        <Label HorizontalAlignment="Center" Name="labelScanInterval" Width="25">5</Label>
+                    </DockPanel>
+                </DockPanel>
+            </GroupBox>
+        </DockPanel>
+
+        <DockPanel Grid.Row="1">
+            <GroupBox Header="Scan direction" Name="groupBox4">
+                <Grid Name="grid1" Width="215">
+                    <CheckBox  Margin="4,4,0,0" Name="directionAngle45" ContentStringFormat="" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" Width="69.5" FontSize="10" IsChecked="True">45°/135°</CheckBox>
+                    <CheckBox ContentStringFormat="" Margin="106,20,94,0" Name="directionTB" Height="15" VerticalAlignment="Top" Width="15" IsChecked="True" />
+                    <CheckBox ContentStringFormat="" Margin="83,42,0,30.04" Name="directionLR" Width="15" HorizontalAlignment="Left" IsChecked="True" />
+                    <CheckBox ContentStringFormat="" Margin="92,28,0,0" Name="directionLT_RB" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" IsEnabled="False" />
+                    <CheckBox ContentStringFormat="" Height="15" Margin="92,0,0,15" Name="directionLB_RT" VerticalAlignment="Bottom" IsEnabled="False" HorizontalAlignment="Left" Width="15" />
+                    <CheckBox ContentStringFormat="" Margin="0,28,80,0" Name="directionRT_LB" HorizontalAlignment="Right" Width="15" Height="15" IsEnabled="False" VerticalAlignment="Top" />
+                    <CheckBox ContentStringFormat="" HorizontalAlignment="Right" Margin="0,42,72,30.04" Name="directionRL" Width="15" IsChecked="True" />
+                    <CheckBox ContentStringFormat="" Height="15" HorizontalAlignment="Right" Margin="0,0,80,15" Name="directionRB_LT" VerticalAlignment="Bottom" Width="15" IsEnabled="False" />
+                    <Label Margin="21,36,0,26" Name="label4" FontSize="10" HorizontalAlignment="Left" Width="63">Left to right</Label>
+                    <Label FontSize="10" HorizontalAlignment="Right" Margin="0,36,14,26" Name="label5" Width="63">Right to left</Label>
+                    <Label FontSize="10" Margin="73,0,60,62" Name="label6">Top to bottom</Label>
+                    <Label FontSize="10" Margin="77,66,56,-4" Name="label7">Bottom to top</Label>
+                    <CheckBox ContentStringFormat="" Height="15" Margin="106,0,94,9" Name="directionBT" VerticalAlignment="Bottom" IsChecked="True" />
+                </Grid>
+            </GroupBox>
+        </DockPanel>
+
+        <GroupBox Grid.Row="2" Header="Barcode types">
+            <TabControl SelectedIndex="0">
+                <TabItem Header="1D">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="29" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical" Width="124">
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeCode39" IsChecked="True">Code 39</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeCode128" IsChecked="True">Code 128</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeGs1_128CheckBox">GS1-128</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeCode16K">Code 16K</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeCode11">Code 11</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeCode93">Code 93</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeCode32">Code 32</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeVin">VIN</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodePzn">PZN</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeSscc18CheckBox">SSCC-18</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeVicsBolCheckBox">VICS BOL</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeVicsScacProCheckBox">VICS SCAC PRO</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeCodabar">Codabar</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodePatchCode">Patch Code</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodePharmacode">Pharmacode</CheckBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical">
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeI25">Interleaved 2 of 5</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeOpcCheckBox">OPC</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeItf14CheckBox">ITF-14</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeS25">Standard 2 of 5</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeIata2of5">IATA 2 of 5</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMatrix2of5" Margin="1,1,1,10">Matrix 2 of 5</CheckBox>
+
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeEAN">EAN-13 / EAN-8</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeUPCA">UPC-A</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeUPCE">UPC-E</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeEANPlus">Plus 2 / 5</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeIsxn">ISBN / ISMN / ISSN</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeJanCheckBox" Margin="1,1,1,10">JAN-13 / JAN-8</CheckBox>
+
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeTelepen">Telepen</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMSI">MSI</CheckBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <Button Grid.Row="1" HorizontalAlignment="Right" Width="63" Height="23" Click="barcodeTypesAllOrClear_Click">All / Clear</Button>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Postal">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="29" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+
+                            <StackPanel Orientation="Vertical" Width="Auto">
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeAustralian">Australia Post</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeIntelligentMail">Intelligent Mail</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodePlanet" >Planet</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodePostnet">Postnet</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeRoyalMail">Royal Mail</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMailmark4LCheckBox">Mailmark 4-state L</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMailmark4CCheckBox">Mailmark 4-state C</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeDutchKIX">Dutch KIX</CheckBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical">
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeDeutschePostLeitcodeCheckBox">Deutsche Post Leitcode</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeDeutschePostIdentcodeCheckBox">Deutsche Post Identcode</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeSwissPostParcelCheckBox">Swiss PostParcel</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeFedExGround96CheckBox">FedEx Ground 96</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeDhlAwbCheckBox">DHL AWB</CheckBox>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Button Grid.Row="1" HorizontalAlignment="Right" Width="63" Height="23" Click="barcodeTypesAllOrClear_Click">All / Clear</Button>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="RSS / GS1 DataBar (1D)">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="29" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <Label Style="{StaticResource BarcodeTypeLabelStyle}" Height="23">RSS</Label>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeRSS14">RSS-14</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeRSSExpanded">RSS Expanded</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeRSSLimited">RSS Limited</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeRSS14Stacked">RSS-14 Stacked</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeRSSExpandedStacked">RSS Expanded Stacked</CheckBox>
+
+                            <Label Style="{StaticResource BarcodeTypeLabelStyle}" Height="23">GS1 DataBar</Label>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeGs1DataBarCheckBox">GS1 DataBar</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeGs1DataBarExpandedCheckBox">GS1 DataBar Expanded</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeGs1DataBarLimitedCheckBox">GS1 DataBar Limited</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeGs1DataBarStackedCheckBox">GS1 DataBar Stacked</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeGs1DataBarExpandedStackedCheckBox">GS1 DataBar Expanded Stacked</CheckBox>
+                        </StackPanel>
+
+                        <Button Grid.Row="1" HorizontalAlignment="Right" Width="63" Height="23" Click="barcodeTypesAllOrClear_Click">All / Clear</Button>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="2D">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="160" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="29" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.ColumnSpan="2">
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeAztec">Aztec (Rune, Compact, FullRange)</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeGs1AztecCheckBox">GS1 Aztec (GS1 System data)</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeDataMatrix">Data Matrix</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeGs1DataMatrixCheckBox">GS1 DataMatrix</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodePpn">PPN (IFA PPN-Code)</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMailmarkCmdmType7CheckBox">Mailmark CMDM Type7</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMailmarkCmdmType9CheckBox">Mailmark CMDM Type9</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMailmarkCmdmType29CheckBox">Mailmark CMDM Type29</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodePDF417">PDF417, PDF417 Compact</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMicroPDF417">Micro PDF417</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeQR">QR</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeGs1QRCheckbox">GS1 QR</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMicroQR">Micro QR</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeMaxiCode">MaxiCode</CheckBox>
+                            <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeHanXinCodeCheckBox">Han Xin Code</CheckBox>
+                        </StackPanel>
+                        <GroupBox Grid.Row="0" Grid.Column="1" Header="XFA Compressed" VerticalAlignment="Top" Margin="0,40,0,0" Height="90">
+                            <StackPanel>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeXFAAztec" >Aztec</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeXFAQR">QR</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeXFADataMatrix">Data Matrix</CheckBox>
+                                <CheckBox Style="{StaticResource BarcodeTypeCheckBoxStyle}" Name="barcodeXFAPDF417">PDF417</CheckBox>
+                            </StackPanel>
+                        </GroupBox>
+                        <Button Grid.Row="1" Click="barcodeTypesAllOrClear_Click" Grid.Column="1" Margin="0.167,3,0,3">All / Clear</Button>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </GroupBox>
+    </Grid>
+</UserControl>

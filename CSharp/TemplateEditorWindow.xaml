@@ -1,0 +1,195 @@
+﻿<Window x:Class="WpfFormsProcessingDemo.TemplateEditorWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vsui="clr-namespace:Vintasoft.Imaging.Wpf.UI;assembly=Vintasoft.Imaging.Wpf.UI"
+    xmlns:widcci="clr-namespace:WpfDemosCommonCode.Imaging"
+    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+    xmlns:cc ="clr-namespace:WpfFormsProcessingDemo"
+    Title="Form Field Template Editor" WindowStartupLocation="CenterScreen"
+    Height="501" Width="800"
+    MinHeight="300" MinWidth="400"
+    Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <Style TargetType="GridSplitter">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Width" Value="5" />
+            <Setter Property="Height" Value="5" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+            <Setter Property="Focusable" Value="False" />
+        </Style>
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+            <Setter Property="Stretch" Value="None" />
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <BitmapImage x:Key="BarcodeField" UriSource="Resources/BarcodeField.png" />
+        <BitmapImage x:Key="EllipticalOmrField" UriSource="Resources/EllipticalOmrField.png" />
+        <BitmapImage x:Key="OcrField" UriSource="Resources/OcrField.png" />
+        <BitmapImage x:Key="RectangularOmrField" UriSource="Resources/RectangularOmrField.png" />
+        <BitmapImage x:Key="TableOfEllipticalOmrFields" UriSource="Resources/TableOfEllipticalOmrFields.png" />
+        <BitmapImage x:Key="TableOfRectangularOmrFields" UriSource="Resources/TableOfRectangularOmrFields.png" />
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding x:Name="cutCommandBinding" Command="{x:Static cc:TemplateEditorWindow._cutCommand}" Executed="cutMenuItem_Click" CanExecute="cutCommandBinding_CanExecute" />
+        <CommandBinding x:Name="copyCommandBinding" Command="{x:Static cc:TemplateEditorWindow._copyCommand}" Executed="copyMenuItem_Click" CanExecute="copyCommandBinding_CanExecute" />
+        <CommandBinding x:Name="pasteCommandBinding" Command="{x:Static cc:TemplateEditorWindow._pasteCommand}" Executed="pasteMenuItem_Click"  CanExecute="pasteCommandBinding_CanExecute"/>
+        <CommandBinding x:Name="deleteAllCommandBinding" Command="{x:Static cc:TemplateEditorWindow._deleteAllCommand}" Executed="deleteAllMenuItem_Click" CanExecute="deleteAllCommandBinding_CanExecute" />
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Command="{x:Static cc:TemplateEditorWindow._cutCommand}" Modifiers="SHIFT" Key="DEL" />
+        <KeyBinding Command="{x:Static cc:TemplateEditorWindow._copyCommand}" Modifiers="CTRL" Key="INS" />
+        <KeyBinding Command="{x:Static cc:TemplateEditorWindow._pasteCommand}" Modifiers="SHIFT" Key="INS" />
+        <KeyBinding Command="{x:Static cc:TemplateEditorWindow._deleteAllCommand}" Modifiers="ALT" Key="DEL" />
+    </Window.InputBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Height="25">
+            <MenuItem Header="File" Name="fileMenuItem">
+                <MenuItem Header="Open Form Document Template..." Name="openDocumentMenuItem" Click="openDocumentMenuItem_Click" />
+                <MenuItem Header="Add Form Document Template..." Name="addDocumentMenuItem" Click="addDocumentMenuItem_Click" />
+                <Separator />
+                <MenuItem Header="Open Template Image..." Name="openTemplateImageMenuItem" Click="openTemplateImageMenuItem_Click" />
+                <MenuItem Header="Add Template Image..." Name="addTemplateImageMenuItem" Click="addTemplateImageMenuItem_Click" />
+                <Separator />
+                <MenuItem Header="Save Form Document Template As..." Name="saveDocumentAsMenuItem" Click="saveDocumentAsMenuItem_Click" />
+                <MenuItem Header="Close Form Document Template" Name="closeDocumentMenuItem" Click="closeDocumentMenuItem_Click" />
+                <Separator />
+                <MenuItem Header="Close" Name="closeMenuItem" Click="closeMenuItem_Click" />
+            </MenuItem>
+
+            <MenuItem Header="Page" Name="pageMenuItem">
+                <MenuItem Header="Load Field Templates..." Name="loadPageFieldTemplatesMenuItem" Click="loadPageFieldTemplatesMenuItem_Click" />
+                <MenuItem Header="Save Field Templates..." Name="savePageFieldTemplatesMenuItem" Click="savePageFieldTemplatesMenuItem_Click" />
+            </MenuItem>
+
+            <MenuItem Header="View" Name="viewMenuItem">
+                <MenuItem Header="Image Viewer Settings..." Name="imageViewerSettingsMenuItem" Click="imageViewerSettingsMenuItem_Click" />
+            </MenuItem>
+
+            <MenuItem Header="Field Templates" Name="fieldTemplatesMenuItem">
+                <MenuItem Header="Template Image Background Compensation" Name="templateImageBackgroundCompensatMenuItem">
+                    <MenuItem Header="Automatically Compensate for All Pages" Name="automaticallyCompensateForAllPagesMenuItem"  IsCheckable="true" IsChecked="True" />
+                    <Separator />
+                    <MenuItem Header="Compensate for All Pages" Name="compensateForAllPagesMenuItem" Click="compensateForAllPagesMenuItem_Click" />
+                    <MenuItem Header="Compensate for Current Page" Name="compensateForCurrentPageMenuItem" Click="compensateForCurrentPageMenuItem_Click" />
+                    <MenuItem Header="Ignore for All Pages" Name="ignoreForAllPagesMenuItem" Click="ignoreForAllPagesMenuItem_Click" />
+                    <MenuItem Header="Ignore for Current Page" Name="ignoreForCurrentPageMenuItem" Click="ignoreForCurrentPageMenuItem_Click" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Cut" HeaderStringFormat="{}{0} (Shift+ Del)" Name="cutMenuItem" Click="cutMenuItem_Click" />
+                <MenuItem Header="Copy" HeaderStringFormat="{}{0} (Ctrl+ Ins)" Name="copyMenuItem" Click="copyMenuItem_Click" />
+                <MenuItem Header="Paste"  HeaderStringFormat="{}{0} (Shift+ Ins)" Name="pasteMenuItem" Click="pasteMenuItem_Click" />
+                <MenuItem Header="Delete" HeaderStringFormat="{}{0} (Del)" Name="deleteMenuItem" Click="deleteMenuItem_Click" />
+                <MenuItem Header="Delete All" HeaderStringFormat="{}{0} (Alt+ Del)" Name="deleteAllMenuItem" Click="deleteAllMenuItem_Click" />
+                <Separator />
+                <MenuItem Header="Group..." Name="groupMenuItem" Click="groupMenuItem_Click" />
+                <MenuItem Header="Ungroup..." Name="ungroupMenuItem" Click="ungroupMenuItem_Click" />
+            </MenuItem>
+
+            <MenuItem Header="OMR" Name="omrMenuItem">
+                <MenuItem Header="Add OMR Rectangle" Name="addOmrRectangleMenuItem" Click="addOmrRectangleMenuItem_Click" />
+                <MenuItem Header="Add OMR Ellipse" Name="addOmrEllipseMenuItem" Click="addOmrEllipseMenuItem_Click" />
+                <MenuItem Header="Add Table of OMR Rectangles" Name="addTableOfOmrRectanglesMenuItem" Click="addTableOfOmrRectanglesMenuItem_Click" />
+                <MenuItem Header="Add Table of OMR Ellipses" Name="addTableOfOmrEllipsesMenuItem" Click="addTableOfOmrEllipsesMenuItem_Click" />
+            </MenuItem>
+
+            <MenuItem Header="OCR" Name="ocrMenuItem">
+                <MenuItem Header="Add OCR Field" Name="addOCRFieldMenuItem" Click="addOCRFieldMenuItem_Click" />
+                <Separator />
+                <MenuItem Header="Default OCR Settings..." Name="defaultOcrSettingsMenuItem" Click="defaultOcrSettingsMenuItem_Click" />
+            </MenuItem>
+
+            <MenuItem Header="Barcode" Name="barcodeMenuItem">
+                <MenuItem Header="Add barcode field" Name="addBarcodeFieldMenuItem" Click="addBarcodeFieldMenuItem_Click" />
+                <Separator />
+                <MenuItem Header="Default Barcode Reader Settings..." Name="barcodeReaderDefaultSettingsMenuItem" Click="barcodeReaderDefaultSettingsMenuItem_Click" />
+            </MenuItem>
+        </Menu>
+
+        <widcci:ImageViewerToolBar Width="Auto" Grid.Row="1" x:Name="imageViewerToolBar" CanPrint="False" CanNavigate="True" OpenFile="imageViewerToolBar_OpenFile" SaveFile="imageViewerToolBar_SaveFile">
+            <Button Click="addOmrRectangleMenuItem_Click" ToolTip="Rectangle">
+                <Image Source="{StaticResource RectangularOmrField}" />
+            </Button>
+
+            <Button Click="addOmrEllipseMenuItem_Click" ToolTip="Ellipse">
+                <Image Source="{StaticResource EllipticalOmrField}" />
+            </Button>
+
+            <Button Click="addTableOfOmrRectanglesMenuItem_Click" ToolTip="Table Of Rects">
+                <Image Source="{StaticResource TableOfRectangularOmrFields}" />
+            </Button>
+
+            <Button Click="addTableOfOmrEllipsesMenuItem_Click" ToolTip="Table of Ellipses">
+                <Image Source="{StaticResource TableOfEllipticalOmrFields}" />
+            </Button>
+
+            <Button x:Uid="addOcrFieldMenuItem" Click="addOCRFieldMenuItem_Click" ToolTip="OCR field">
+                <Image Source="{StaticResource OcrField}" />
+            </Button>
+
+            <Button Click="addBarcodeFieldMenuItem_Click" ToolTip="Barcode field">
+                <Image Source="{StaticResource BarcodeField}" />
+            </Button>
+        </widcci:ImageViewerToolBar>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="171*" MinWidth="100" />
+                <ColumnDefinition Width="390*" MinWidth="100" />
+                <ColumnDefinition Width="218*" MinWidth="100" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"  Margin="0,0,5,0" BorderThickness="1">
+                <vsui:WpfThumbnailViewer Name="thumbnailViewer1" BorderThickness="1"/>
+            </Border>
+            <GridSplitter Grid.Column="0" HorizontalAlignment="Right"  Height="Auto" />
+            <Border Grid.Column="1" Margin="0,0,5,0" KeyDown="imageViewer1_KeyDown" BorderThickness="1">
+                <vsui:WpfImageViewer Name="imageViewer1" FocusedIndexChanged="imageViewer1_FocusedIndexChanged" SizeMode="BestFit" />
+            </Border>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Right" Height="Auto" />
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="204*" MinHeight="50" />
+                    <RowDefinition Height="204*" MinHeight="50" />
+                </Grid.RowDefinitions>
+
+                <TreeView Grid.Row="0" Name="templatesTreeView" Margin="0,0,0,5"  KeyDown="imageViewer1_KeyDown">
+                    <TreeViewItem Name="rootNode" Header="Untitled" />
+                </TreeView>
+
+                <GridSplitter Grid.Row="0" VerticalAlignment="Bottom" Width="Auto" />
+
+                <GroupBox Header="No selected object" Name="propertyGridGroupBox" Grid.Row="1">
+                    <WindowsFormsHost>
+                        <wf:PropertyGrid x:Name="propertyGrid1"/>
+                    </WindowsFormsHost>
+                </GroupBox>
+            </Grid>
+        </Grid>
+
+        <Label Grid.Row="3" Height="27" Name="currentActionLabel" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="3,0" />
+        <Label Grid.Row="3" Height="27" Name="imageInfoLabel" VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="3,0" />
+    </Grid>
+</Window>
