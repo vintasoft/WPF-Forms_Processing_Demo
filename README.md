@@ -9,7 +9,7 @@ This C# project uses <a href="https://www.vintasoft.com/vsimaging-dotnet-index.h
 
 
 ## Screenshot
-<img src="vintasoft-wpf-forms-processing-demo.png" alt="VintaSoft WPF Forms Processing Demo">
+<img src="vintasoft-wpf-forms-processing-demo.png" title="VintaSoft WPF Forms Processing Demo">
 
 
 ## Usage
