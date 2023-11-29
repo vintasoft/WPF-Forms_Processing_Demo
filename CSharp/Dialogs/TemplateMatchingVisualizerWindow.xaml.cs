@@ -394,7 +394,7 @@ namespace WpfFormsProcessingDemo
             {
                 // if filled form image must be aligned to the template form image
                 if (_alignFilledImage)
-                    // transfrom zones of filled form image
+                    // transform zones of filled form image
                     TransformZones(_transformationMatrix, filledZones, !_alignFilledImage);
                 // if filled form image must NOT be aligned to the template form image
                 else
