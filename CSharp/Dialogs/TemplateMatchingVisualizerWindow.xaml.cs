@@ -1347,7 +1347,7 @@ namespace WpfFormsProcessingDemo
         #region Hot keys
 
         /// <summary>
-        /// Handles the CanExecute event of ShowImprintsCommandBinding object.
+        /// Handles the CanExecute event of showImprintsCommandBinding object.
         /// </summary>
         private void showImprintsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -1355,7 +1355,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of ExecuteTemplateMatchingCommandBinding object.
+        /// Handles the CanExecute event of executeTemplateMatchingCommandBinding object.
         /// </summary>
         private void executeTemplateMatchingCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {

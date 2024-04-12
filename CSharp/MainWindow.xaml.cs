@@ -554,7 +554,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the OpenFile event of FilledImageViewerToolStrip object.
+        /// Handles the OpenFile event of filledImageViewerToolStrip object.
         /// </summary>
         private void filledImageViewerToolStrip_OpenFile(object sender, EventArgs e)
         {
@@ -1940,7 +1940,7 @@ namespace WpfFormsProcessingDemo
         #region Hot keys
 
         /// <summary>
-        /// Handles the CanExecute event of OpenTemplateCommandBinding object.
+        /// Handles the CanExecute event of openTemplateCommandBinding object.
         /// </summary>
         private void openTemplateCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -1948,7 +1948,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of OpenFilledImagesCommandBinding object.
+        /// Handles the CanExecute event of openFilledImagesCommandBinding object.
         /// </summary>
         private void openFilledImagesCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -1956,7 +1956,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of AddFilledImagesCommandBinding object.
+        /// Handles the CanExecute event of addFilledImagesCommandBinding object.
         /// </summary>
         private void addFilledImagesCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -1964,7 +1964,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of CloseAllCommandBinding object.
+        /// Handles the CanExecute event of closeAllCommandBinding object.
         /// </summary>
         private void closeAllCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -1972,7 +1972,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of RecognizeCurrentPageCommandBinding object.
+        /// Handles the CanExecute event of recognizeCurrentPageCommandBinding object.
         /// </summary>
         private void recognizeCurrentPageCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -1980,7 +1980,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of RecognizeAllPagesCommandBinding object.
+        /// Handles the CanExecute event of recognizeAllPagesCommandBinding object.
         /// </summary>
         private void recognizeAllPagesCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -1988,7 +1988,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of RotateClockwiseCommandBinding object.
+        /// Handles the CanExecute event of rotateClockwiseCommandBinding object.
         /// </summary>
         private void rotateClockwiseCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -1996,7 +1996,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of RotateCounterclockwiseCommandBinding object.
+        /// Handles the CanExecute event of rotateCounterclockwiseCommandBinding object.
         /// </summary>
         private void rotateCounterclockwiseCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {

@@ -591,7 +591,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the SaveFile event of ImageViewerToolBar object.
+        /// Handles the SaveFile event of imageViewerToolBar object.
         /// </summary>
         private void imageViewerToolBar_SaveFile(object sender, EventArgs e)
         {
@@ -1101,7 +1101,7 @@ namespace WpfFormsProcessingDemo
         #region Image viewer
 
         /// <summary>
-        /// Handles the KeyDown event of ImageViewer1 object.
+        /// Handles the KeyDown event of imageViewer1 object.
         /// </summary>
         private void imageViewer1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -2047,6 +2047,9 @@ namespace WpfFormsProcessingDemo
             }
         }
 
+        /// <summary>
+        /// Handles the PropertyValueChanged event of propertyGrid1 object.
+        /// </summary>
         void propertyGrid1_PropertyValueChanged(object s, System.Windows.Forms.PropertyValueChangedEventArgs e)
         {
             if (e.ChangedItem.Label != "Name" && e.ChangedItem.Label != "DocumentName")
@@ -2084,7 +2087,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the SelectedItemChanged event of TemplatesTreeView object.
+        /// Handles the SelectedItemChanged event of templatesTreeView object.
         /// </summary>
         void templatesTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -2133,7 +2136,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the MouseDoubleClick event of TemplatesTreeView object.
+        /// Handles the MouseDoubleClick event of templatesTreeView object.
         /// </summary>
         void templatesTreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -2151,7 +2154,7 @@ namespace WpfFormsProcessingDemo
         #region Hot keys
 
         /// <summary>
-        /// Handles the CanExecute event of CutCommandBinding object.
+        /// Handles the CanExecute event of cutCommandBinding object.
         /// </summary>
         private void cutCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -2159,7 +2162,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of CopyCommandBinding object.
+        /// Handles the CanExecute event of copyCommandBinding object.
         /// </summary>
         private void copyCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -2167,7 +2170,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of PasteCommandBinding object.
+        /// Handles the CanExecute event of pasteCommandBinding object.
         /// </summary>
         private void pasteCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -2175,7 +2178,7 @@ namespace WpfFormsProcessingDemo
         }
 
         /// <summary>
-        /// Handles the CanExecute event of DeleteAllCommandBinding object.
+        /// Handles the CanExecute event of deleteAllCommandBinding object.
         /// </summary>
         private void deleteAllCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
