@@ -1,5 +1,7 @@
 ﻿using System;
 
+using WpfDemosCommonCode;
+
 using Vintasoft.Imaging.FormsProcessing.FormRecognition.Formatters;
 
 namespace WpfFormsProcessingDemo
@@ -37,8 +39,9 @@ namespace WpfFormsProcessingDemo
             {
                 return base.BindToType(assemblyName, typeName);
             }
-            catch
+            catch (Exception ex)
             {
+                DemosTools.ShowErrorMessage(ex);
                 return null;
             }
         }

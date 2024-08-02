@@ -23,6 +23,9 @@ using Vintasoft.Imaging.ImageProcessing;
 #if !REMOVE_OCR_PLUGIN
 using Vintasoft.Imaging.Ocr;
 using Vintasoft.Imaging.Ocr.Tesseract;
+#if !REMOVE_OCR_ML_ASSEMBLY
+using Vintasoft.Imaging.Ocr.ML.HandwrittenDigits;
+#endif
 #endif
 #if !REMOVE_BARCODE_SDK
 using Vintasoft.Barcode; 
@@ -332,6 +335,24 @@ namespace WpfFormsProcessingDemo
                 _defaultOcrRecognitionRegionSplittingSettings = value;
             }
         }
+
+#if !REMOVE_OCR_ML_ASSEMBLY
+        HandwrittenDigitsOcrSettings _defaultHandwritingDigitsOcrSettings;
+        /// <summary>
+        /// Gets or sets the default handwiting digits OCR engine settings for newly created OCR fields.
+        /// </summary>
+        public HandwrittenDigitsOcrSettings DefaultHandwritingDigitsOcrSettings
+        {
+            get
+            {
+                return _defaultHandwritingDigitsOcrSettings;
+            }
+            set
+            {
+                _defaultHandwritingDigitsOcrSettings = value;
+            }
+        }
+#endif
 #endif
 
 #if !REMOVE_BARCODE_SDK
@@ -954,6 +975,17 @@ namespace WpfFormsProcessingDemo
 #endif
         }
 
+        /// <summary>
+        /// Adds an handwrited digits OCR field template to an image and starts building of it.
+        /// </summary>
+        private void addHandwritedDigitsOCRFieldMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+#if !REMOVE_OCR_PLUGIN && !REMOVE_OCR_ML_ASSEMBLY
+            AddFormFieldTemplate(new OcrFieldTemplate((OcrEngineSettings)_defaultHandwritingDigitsOcrSettings.Clone(),
+                (OcrRecognitionRegionSplittingSettings)_defaultOcrRecognitionRegionSplittingSettings.Clone()));
+#endif
+        }
+        
         /// <summary>
         /// Shows the default OCR settings for newly added OCR fields.
         /// </summary>

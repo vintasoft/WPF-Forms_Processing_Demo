@@ -38,6 +38,7 @@
         <BitmapImage x:Key="BarcodeField" UriSource="Resources/BarcodeField.png" />
         <BitmapImage x:Key="EllipticalOmrField" UriSource="Resources/EllipticalOmrField.png" />
         <BitmapImage x:Key="OcrField" UriSource="Resources/OcrField.png" />
+        <BitmapImage x:Key="HandwritedDigitsOcrField" UriSource="Resources/HandwritedDigitsOcrField.png" />
         <BitmapImage x:Key="RectangularOmrField" UriSource="Resources/RectangularOmrField.png" />
         <BitmapImage x:Key="TableOfEllipticalOmrFields" UriSource="Resources/TableOfEllipticalOmrFields.png" />
         <BitmapImage x:Key="TableOfRectangularOmrFields" UriSource="Resources/TableOfRectangularOmrFields.png" />
@@ -147,6 +148,10 @@
 
             <Button x:Uid="addOcrFieldMenuItem" Click="addOCRFieldMenuItem_Click" ToolTip="OCR field">
                 <Image Source="{StaticResource OcrField}" />
+            </Button>
+
+            <Button x:Uid="addHandwitedDigitsMenuItem" Click="addHandwritedDigitsOCRFieldMenuItem_Click" ToolTip="Handwrited Digits field">
+                <Image Source="{StaticResource HandwritedDigitsOcrField}" />
             </Button>
 
             <Button Click="addBarcodeFieldMenuItem_Click" ToolTip="Barcode field">

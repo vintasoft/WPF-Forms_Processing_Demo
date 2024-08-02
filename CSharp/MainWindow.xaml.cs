@@ -30,6 +30,9 @@ using Vintasoft.Imaging.ImageProcessing.Document;
 #if !REMOVE_OCR_PLUGIN
 using Vintasoft.Imaging.Ocr;
 using Vintasoft.Imaging.Ocr.Tesseract;
+#if !REMOVE_OCR_ML_ASSEMBLY
+using Vintasoft.Imaging.Ocr.ML.HandwrittenDigits;
+#endif
 #endif
 using Vintasoft.Imaging.UI;
 #if !REMOVE_BARCODE_SDK
@@ -134,6 +137,13 @@ namespace WpfFormsProcessingDemo
         /// The default OCR recognition region splitting settings.
         /// </summary>
         OcrRecognitionRegionSplittingSettings _defaultOcrRecognitionRegionSplittingSettings;
+
+#if !REMOVE_OCR_ML_ASSEMBLY
+        /// <summary>
+        /// The default handwiting digits OCR recognition region splitting settings.
+        /// </summary>
+        HandwrittenDigitsOcrSettings _defaultHandwritingDigitsOcrSettings;
+#endif
 #endif
 
 #if !REMOVE_BARCODE_SDK
@@ -237,14 +247,31 @@ namespace WpfFormsProcessingDemo
             _renderingSettings = new RenderingSettings(300, 300);
 
 #if !REMOVE_OCR_PLUGIN
+            OcrEngineManager ocrEngineManager = null;
             try
             {
                 _ocrEngine = new TesseractOcr(TesseractOcrDllDirectory);
-                OcrFieldTemplate.OcrEngineManager = new OcrEngineManager(_ocrEngine);
+#if !REMOVE_OCR_ML_ASSEMBLY
+                ocrEngineManager = new OcrEngineManager(_ocrEngine, new HandwrittenDigitsOcrEngine());
+#else
+                ocrEngineManager = new OcrEngineManager(_ocrEngine);
+#endif
+                OcrFieldTemplate.OcrEngineManager = ocrEngineManager;
             }
             catch (Exception ex)
             {
-                DemosTools.ShowErrorMessage("OCR engine error", ex);
+                if (ex.Message.Contains("ErrorCode=126"))
+                {
+                    DemosTools.ShowErrorMessage(string.Format("{0}. Microsoft Visual C++ 2019 Redistributable Package must be installed on computer for correct work of Tesseract5.", ex.Message));
+                }
+                else
+                {
+                    DemosTools.ShowErrorMessage(ex);
+                }
+#if !REMOVE_OCR_ML_ASSEMBLY
+                ocrEngineManager = new OcrEngineManager(new HandwrittenDigitsOcrEngine());
+#endif
+                OcrFieldTemplate.OcrEngineManager = ocrEngineManager;
             }
 
             TesseractOcrSettings tesseractSettings = new TesseractOcrSettings(OcrLanguage.English);
@@ -253,6 +280,10 @@ namespace WpfFormsProcessingDemo
 
             _defaultOcrRecognitionRegionSplittingSettings =
                (OcrRecognitionRegionSplittingSettings)OcrRecognitionRegionSplittingSettings.Default.Clone();
+
+#if !REMOVE_OCR_ML_ASSEMBLY
+            _defaultHandwritingDigitsOcrSettings = new HandwrittenDigitsOcrSettings();
+#endif
 #endif
 
 #if !REMOVE_BARCODE_SDK
@@ -271,6 +302,9 @@ namespace WpfFormsProcessingDemo
 #if !REMOVE_OCR_PLUGIN
             _templateEditorWindow.DefaultOcrEngineSettings = _defaultOcrEngineSettings;
             _templateEditorWindow.DefaultOcrRecognitionRegionSplittingSettings = _defaultOcrRecognitionRegionSplittingSettings;
+#if !REMOVE_OCR_ML_ASSEMBLY
+            _templateEditorWindow.DefaultHandwritingDigitsOcrSettings = _defaultHandwritingDigitsOcrSettings;
+#endif
 #endif
 #if !REMOVE_BARCODE_SDK
             _templateEditorWindow.DefaultBarcodeReaderSettings = _defaultBarcodeReaderSettings;
@@ -1360,7 +1394,7 @@ namespace WpfFormsProcessingDemo
                 _recognitionStopwatch.Stop();
 
             // show error message
-            DemosTools.ShowErrorMessage(e.Exception, GetImageName(e.Image));
+            DemosTools.ShowErrorMessage(GetImageName(e.Image), DemosTools.GetFullExceptionMessage(e.Exception));
             LogWriteLine(string.Format("Image recognition failed: {0}:", GetImageName(e.Image)));
             LogWriteLine();
 

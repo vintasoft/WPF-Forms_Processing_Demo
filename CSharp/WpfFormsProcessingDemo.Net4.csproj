@@ -91,26 +91,31 @@
     <Reference Include="UIAutomationProvider" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <PackageReference Include="Vintasoft.Barcode" Version="15.0.3.1" />
-    <PackageReference Include="Vintasoft.Barcode.Wpf" Version="15.0.3.1" />
-    <PackageReference Include="Vintasoft.Imaging" Version="12.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.Gdi" Version="12.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.DocCleanup" Version="7.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.FormsProcessing" Version="5.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.FormsProcessing.Ocr" Version="5.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.FormsProcessing.Ocr.Wpf.UI" Version="5.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.FormsProcessing.Wpf.UI" Version="5.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.Jbig2Codec" Version="9.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.Jpeg2000Codec" Version="8.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.Ocr" Version="7.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.Ocr.Tesseract" Version="7.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.Pdf" Version="9.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.UI" Version="12.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.Wpf" Version="12.4.10.1" />
-    <PackageReference Include="Vintasoft.Imaging.Wpf.UI" Version="12.4.10.1" />
-    <PackageReference Include="Vintasoft.Shared" Version="4.2.0.1" />
+    <PackageReference Include="Vintasoft.Barcode" Version="15.0.4.1" />
+    <PackageReference Include="Vintasoft.Barcode.Wpf" Version="15.0.4.1" />
+    <PackageReference Include="Vintasoft.Imaging" Version="12.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.Gdi" Version="12.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.DocCleanup" Version="7.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.FormsProcessing" Version="5.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.FormsProcessing.Ocr" Version="5.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.FormsProcessing.Ocr.Wpf.UI" Version="5.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.FormsProcessing.Wpf.UI" Version="5.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.Jbig2Codec" Version="9.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.Jpeg2000Codec" Version="8.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.Ocr" Version="7.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.Ocr.ML" Version="7.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.Ocr.Tesseract" Version="7.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.Pdf" Version="9.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.UI" Version="12.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.Wpf" Version="12.5.0.1" />
+    <PackageReference Include="Vintasoft.Imaging.Wpf.UI" Version="12.5.0.1" />
+    <PackageReference Include="Vintasoft.Shared" Version="4.3.0.1" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML" version="3.0.1" />
+    <PackageReference Include="Microsoft.ML.LightGbm" version="3.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -477,6 +482,7 @@
     </Resource>
     <Resource Include="WpfDemosCommonCode\Resources\VintasoftLogo.png">
     </Resource>
+    <Resource Include="Resources\HandwritedDigitsOcrField.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
