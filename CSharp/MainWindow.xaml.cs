@@ -198,26 +198,10 @@ namespace WpfFormsProcessingDemo
 
             InitializeComponent();
 
-            // init "Template Matching" => "Image Imprint Generator" 
-            lineRecognizerMenuItem.Tag = "KeyLine";
-            patternRecognizerMenuItem.Tag = "KeyLPattern";
-            lineAndPatternRecognizerMenuItem.Tag = "All";
-            _keyZoneRecognizerCommands = new KeyZoneRecognizerCommand[] {
-                        new KeyLineRecognizerCommand(),
-                        new KeyMarkRecognizerCommand()
-            };
-            _selectedKeyZoneRecognizerCommands = new KeyZoneRecognizerCommand[] {
-                _keyZoneRecognizerCommands[0]
-            };
+            InitKeyZoneRecognizers();
 
-            filledImageViewer.InputGestureCopy = null;
-            filledImageViewer.InputGestureCut = null;
-            filledImageViewer.InputGestureDelete = null;
-            filledImageViewer.InputGestureInsert = null;
-            recognizedImageViewer.InputGestureCopy = null;
-            recognizedImageViewer.InputGestureCut = null;
-            recognizedImageViewer.InputGestureDelete = null;
-            recognizedImageViewer.InputGestureInsert = null;
+            InitInputGesturesInFilledImageViewer();
+
             _openFileDialog.Multiselect = true;
 
             sourceThumbnailViewer.MasterViewer = filledImageViewer;
@@ -235,81 +219,18 @@ namespace WpfFormsProcessingDemo
 
             InitImageScaleMenu();
 
-            _recognizedFieldViewerTool = new WpfFormFieldViewerTool();
-            _recognizedFieldViewerTool.MouseLeftButtonDown += new MouseButtonEventHandler(recognizedFieldViewerTool_MouseLeftButtonDown);
-            _recognizedFieldViewerTool.FieldViewMouseEnter += new EventHandler<WpfFormFieldViewEventArgs>(recognizedFieldViewerTool_FieldViewMouseEnter);
-            _recognizedFieldViewerTool.FieldViewMouseLeave += new EventHandler<WpfFormFieldViewEventArgs>(recognizedFieldViewerTool_FieldViewMouseLeave);
-            recognizedImageViewer.VisualTool = _recognizedFieldViewerTool;
+            InitFormFieldViewerTool();
 
-            _formRecognitionManager = new FormRecognitionManager();
+            InitFormRecognitionManager();
 
             _binarizeCommand = new ChangePixelFormatToBlackWhiteCommand(BinarizationMode.Global);
             _renderingSettings = new RenderingSettings(300, 300);
 
-#if !REMOVE_OCR_PLUGIN
-            OcrEngineManager ocrEngineManager = null;
-            try
-            {
-                _ocrEngine = new TesseractOcr(TesseractOcrDllDirectory);
-#if !REMOVE_OCR_ML_ASSEMBLY
-                ocrEngineManager = new OcrEngineManager(_ocrEngine, new HandwrittenDigitsOcrEngine());
-#else
-                ocrEngineManager = new OcrEngineManager(_ocrEngine);
-#endif
-                OcrFieldTemplate.OcrEngineManager = ocrEngineManager;
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message.Contains("ErrorCode=126"))
-                {
-                    DemosTools.ShowErrorMessage(string.Format("{0}. Microsoft Visual C++ 2019 Redistributable Package must be installed on computer for correct work of Tesseract5.", ex.Message));
-                }
-                else
-                {
-                    DemosTools.ShowErrorMessage(ex);
-                }
-#if !REMOVE_OCR_ML_ASSEMBLY
-                ocrEngineManager = new OcrEngineManager(new HandwrittenDigitsOcrEngine());
-#endif
-                OcrFieldTemplate.OcrEngineManager = ocrEngineManager;
-            }
+            InitTextRecognitionInFormFields();
 
-            TesseractOcrSettings tesseractSettings = new TesseractOcrSettings(OcrLanguage.English);
-            tesseractSettings.MaxBlobOverlaps = 1;
-            _defaultOcrEngineSettings = tesseractSettings;
+            InitBarcodeReaderSettings();
 
-            _defaultOcrRecognitionRegionSplittingSettings =
-               (OcrRecognitionRegionSplittingSettings)OcrRecognitionRegionSplittingSettings.Default.Clone();
-
-#if !REMOVE_OCR_ML_ASSEMBLY
-            _defaultHandwritingDigitsOcrSettings = new HandwrittenDigitsOcrSettings();
-#endif
-#endif
-
-#if !REMOVE_BARCODE_SDK
-            _defaultBarcodeReaderSettings = new ReaderSettings();
-            _defaultBarcodeReaderSettings.ExpectedBarcodes = 1;
-            _defaultBarcodeReaderSettings.ScanBarcodeTypes = BarcodeType.Code39 | BarcodeType.Code128;
-            _defaultBarcodeReaderSettings.AutomaticRecognition = true;
-
-#endif
-            // create a template editor form
-            _templateEditorWindow = new TemplateEditorWindow(
-                _formRecognitionManager.FormTemplates,
-                _binarizeCommand,
-                _renderingSettings,
-                TesseractOcrDllDirectory);
-#if !REMOVE_OCR_PLUGIN
-            _templateEditorWindow.DefaultOcrEngineSettings = _defaultOcrEngineSettings;
-            _templateEditorWindow.DefaultOcrRecognitionRegionSplittingSettings = _defaultOcrRecognitionRegionSplittingSettings;
-#if !REMOVE_OCR_ML_ASSEMBLY
-            _templateEditorWindow.DefaultHandwritingDigitsOcrSettings = _defaultHandwritingDigitsOcrSettings;
-#endif
-#endif
-#if !REMOVE_BARCODE_SDK
-            _templateEditorWindow.DefaultBarcodeReaderSettings = _defaultBarcodeReaderSettings;
-#endif
-            _templateEditorWindow.Closing += new CancelEventHandler(_templateEditorForm_Closing);
+            InitTemplateEditorWindow();
 
             filledImageViewer.FocusedIndexChanged += new PropertyChangedEventHandler<int>(filledImageViewer_FocusedIndexChanged);
             sourceThumbnailViewer.Images.ImageCollectionChanged += new EventHandler<ImageCollectionChangeEventArgs>(Images_ImageCollectionChanged);
@@ -430,6 +351,127 @@ namespace WpfFormsProcessingDemo
 
 
         #region Methods
+
+        #region Init
+
+        private void InitInputGesturesInFilledImageViewer()
+        {
+            filledImageViewer.InputGestureCopy = null;
+            filledImageViewer.InputGestureCut = null;
+            filledImageViewer.InputGestureDelete = null;
+            filledImageViewer.InputGestureInsert = null;
+            recognizedImageViewer.InputGestureCopy = null;
+            recognizedImageViewer.InputGestureCut = null;
+            recognizedImageViewer.InputGestureDelete = null;
+            recognizedImageViewer.InputGestureInsert = null;
+        }
+
+        private void InitTextRecognitionInFormFields()
+        {
+#if !REMOVE_OCR_PLUGIN
+            OcrEngineManager ocrEngineManager = null;
+            try
+            {
+                _ocrEngine = new TesseractOcr(TesseractOcrDllDirectory);
+#if !REMOVE_OCR_ML_ASSEMBLY
+                ocrEngineManager = new OcrEngineManager(_ocrEngine, new HandwrittenDigitsOcrEngine());
+#else
+                ocrEngineManager = new OcrEngineManager(_ocrEngine);
+#endif
+                OcrFieldTemplate.OcrEngineManager = ocrEngineManager;
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("ErrorCode=126"))
+                {
+                    DemosTools.ShowErrorMessage(string.Format("{0}. Microsoft Visual C++ 2019 Redistributable Package must be installed on computer for correct work of Tesseract5.", ex.Message));
+                }
+                else
+                {
+                    DemosTools.ShowErrorMessage(ex);
+                }
+#if !REMOVE_OCR_ML_ASSEMBLY
+                ocrEngineManager = new OcrEngineManager(new HandwrittenDigitsOcrEngine());
+#endif
+                OcrFieldTemplate.OcrEngineManager = ocrEngineManager;
+            }
+
+            TesseractOcrSettings tesseractSettings = new TesseractOcrSettings(OcrLanguage.English);
+            tesseractSettings.MaxBlobOverlaps = 1;
+            _defaultOcrEngineSettings = tesseractSettings;
+
+            _defaultOcrRecognitionRegionSplittingSettings =
+               (OcrRecognitionRegionSplittingSettings)OcrRecognitionRegionSplittingSettings.Default.Clone();
+
+#if !REMOVE_OCR_ML_ASSEMBLY
+            _defaultHandwritingDigitsOcrSettings = new HandwrittenDigitsOcrSettings();
+#endif
+#endif
+        }
+
+        private void InitKeyZoneRecognizers()
+        {
+            // init "Template Matching" => "Image Imprint Generator" 
+            lineRecognizerMenuItem.Tag = "KeyLine";
+            patternRecognizerMenuItem.Tag = "KeyLPattern";
+            lineAndPatternRecognizerMenuItem.Tag = "All";
+            _keyZoneRecognizerCommands = new KeyZoneRecognizerCommand[] {
+                        new KeyLineRecognizerCommand(),
+                        new KeyMarkRecognizerCommand()
+            };
+            _selectedKeyZoneRecognizerCommands = new KeyZoneRecognizerCommand[] {
+                _keyZoneRecognizerCommands[0]
+            };
+        }
+
+        private void InitFormFieldViewerTool()
+        {
+            _recognizedFieldViewerTool = new WpfFormFieldViewerTool();
+            _recognizedFieldViewerTool.MouseLeftButtonDown += new MouseButtonEventHandler(recognizedFieldViewerTool_MouseLeftButtonDown);
+            _recognizedFieldViewerTool.FieldViewMouseEnter += new EventHandler<WpfFormFieldViewEventArgs>(recognizedFieldViewerTool_FieldViewMouseEnter);
+            _recognizedFieldViewerTool.FieldViewMouseLeave += new EventHandler<WpfFormFieldViewEventArgs>(recognizedFieldViewerTool_FieldViewMouseLeave);
+            recognizedImageViewer.VisualTool = _recognizedFieldViewerTool;
+        }
+
+        private void InitFormRecognitionManager()
+        {
+            _formRecognitionManager = new FormRecognitionManager();
+            _formRecognitionManager.TemplateMatching.ImageImprintGenerator = CreateImageImprintGenerator(null);
+        }
+
+        private void InitBarcodeReaderSettings()
+        {
+#if !REMOVE_BARCODE_SDK
+            _defaultBarcodeReaderSettings = new ReaderSettings();
+            _defaultBarcodeReaderSettings.ExpectedBarcodes = 1;
+            _defaultBarcodeReaderSettings.ScanBarcodeTypes = BarcodeType.Code39 | BarcodeType.Code128;
+            _defaultBarcodeReaderSettings.AutomaticRecognition = true;
+#endif
+        }
+
+        private void InitTemplateEditorWindow()
+        {
+            // create a template editor form
+            _templateEditorWindow = new TemplateEditorWindow(
+                _formRecognitionManager.FormTemplates,
+                _binarizeCommand,
+                _renderingSettings,
+                TesseractOcrDllDirectory);
+#if !REMOVE_OCR_PLUGIN
+            _templateEditorWindow.DefaultOcrEngineSettings = _defaultOcrEngineSettings;
+            _templateEditorWindow.DefaultOcrRecognitionRegionSplittingSettings = _defaultOcrRecognitionRegionSplittingSettings;
+#if !REMOVE_OCR_ML_ASSEMBLY
+            _templateEditorWindow.DefaultHandwritingDigitsOcrSettings = _defaultHandwritingDigitsOcrSettings;
+#endif
+#endif
+#if !REMOVE_BARCODE_SDK
+            _templateEditorWindow.DefaultBarcodeReaderSettings = _defaultBarcodeReaderSettings;
+#endif
+            _templateEditorWindow.Closing += new CancelEventHandler(_templateEditorForm_Closing);
+        }
+
+        #endregion
+
 
         #region Main Form
 

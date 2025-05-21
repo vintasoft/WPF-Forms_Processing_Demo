@@ -110,10 +110,10 @@
             </MenuItem>
 
             <MenuItem Header="OMR" Name="omrMenuItem">
-                <MenuItem Header="Add OMR Rectangle" Name="addOmrRectangleMenuItem" Click="addOmrRectangleMenuItem_Click" />
-                <MenuItem Header="Add OMR Ellipse" Name="addOmrEllipseMenuItem" Click="addOmrEllipseMenuItem_Click" />
-                <MenuItem Header="Add Table of OMR Rectangles" Name="addTableOfOmrRectanglesMenuItem" Click="addTableOfOmrRectanglesMenuItem_Click" />
-                <MenuItem Header="Add Table of OMR Ellipses" Name="addTableOfOmrEllipsesMenuItem" Click="addTableOfOmrEllipsesMenuItem_Click" />
+                <MenuItem Header="Add Rectangular OMR Mark" Name="addOmrRectangleMenuItem" Click="addRectangularOmrMarkMenuItem_Click" />
+                <MenuItem Header="Add Elliptical OMR Mark" Name="addOmrEllipseMenuItem" Click="addEllipticalOmrMarkMenuItem_Click" />
+                <MenuItem Header="Add Table with Rectangular OMR Marks" Name="addTableOfOmrRectanglesMenuItem" Click="addTableWithRectangularOmrMarksMenuItem_Click" />
+                <MenuItem Header="Add Table with Elliptical OMR Marks" Name="addTableOfOmrEllipsesMenuItem" Click="addTableWithEllipticalOmrMarksMenuItem_Click" />
             </MenuItem>
 
             <MenuItem Header="OCR" Name="ocrMenuItem">
@@ -130,19 +130,19 @@
         </Menu>
 
         <widcci:ImageViewerToolBar Width="Auto" Grid.Row="1" x:Name="imageViewerToolBar" CanPrint="False" CanNavigate="True" OpenFile="imageViewerToolBar_OpenFile" SaveFile="imageViewerToolBar_SaveFile">
-            <Button Click="addOmrRectangleMenuItem_Click" ToolTip="Rectangle">
+            <Button Click="addRectangularOmrMarkMenuItem_Click" ToolTip="Rectangular OMR Mark">
                 <Image Source="{StaticResource RectangularOmrField}" />
             </Button>
 
-            <Button Click="addOmrEllipseMenuItem_Click" ToolTip="Ellipse">
+            <Button Click="addEllipticalOmrMarkMenuItem_Click" ToolTip="Elliptical OMR Mark">
                 <Image Source="{StaticResource EllipticalOmrField}" />
             </Button>
 
-            <Button Click="addTableOfOmrRectanglesMenuItem_Click" ToolTip="Table Of Rects">
+            <Button Click="addTableWithRectangularOmrMarksMenuItem_Click" ToolTip="Table with Rectangular OMR Marks">
                 <Image Source="{StaticResource TableOfRectangularOmrFields}" />
             </Button>
 
-            <Button Click="addTableOfOmrEllipsesMenuItem_Click" ToolTip="Table of Ellipses">
+            <Button Click="addTableWithEllipticalOmrMarksMenuItem_Click" ToolTip="Table with Elliptical OMR Marks">
                 <Image Source="{StaticResource TableOfEllipticalOmrFields}" />
             </Button>
 
