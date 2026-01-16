@@ -304,12 +304,12 @@ namespace WpfFormsProcessingDemo
                     {
                         "",
                         @"TesseractOCR\",
-                        @"Debug\net7.0-windows\TesseractOCR\",
-                        @"Release\net7.0-windows\TesseractOCR\",
                         @"Debug\net8.0-windows\TesseractOCR\",
                         @"Release\net8.0-windows\TesseractOCR\",
                         @"Debug\net9.0-windows\TesseractOCR\",
                         @"Release\net9.0-windows\TesseractOCR\",
+                        @"Debug\net10.0-windows\TesseractOCR\",
+                        @"Release\net10.0-windows\TesseractOCR\",
                         @"..\..\TesseractOcr\",
                     };
 
