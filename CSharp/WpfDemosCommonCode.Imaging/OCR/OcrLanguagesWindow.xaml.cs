@@ -86,7 +86,7 @@ namespace WpfDemosCommonCode.Imaging
         /// </summary>
         private void downloadAdditionalLanguageDictionariesButton_Click(object sender, RoutedEventArgs e)
         {
-            DemosTools.OpenBrowser("https://www.vintasoft.com/docs/vsimaging-dotnet/Programming-Ocr-Prepare_OCR_engine_for_text_recognition.html");
+            DemosTools.OpenBrowser("https://www.vintasoft.com/docs/vsimaging-dotnet/Programming-OCR-Prepare_OCR_engine_for_text_recognition.html");
         }
 
         #endregion
