@@ -6,8 +6,8 @@ using Vintasoft.Imaging;
 using Vintasoft.Imaging.Codecs.Decoders;
 using Vintasoft.Imaging.ImageProcessing;
 
-using WpfDemosCommonCode;
-using WpfDemosCommonCode.Imaging;
+using WpfCommonCode;
+using WpfCommonCode.Imaging;
 
 namespace WpfFormsProcessingDemo
 {

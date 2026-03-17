@@ -8,7 +8,7 @@ using System.Windows.Input;
 using Vintasoft.Imaging.ImageProcessing;
 
 
-namespace WpfDemosCommonCode
+namespace WpfCommonCode
 {
     /// <summary>
     /// A control that allows to view the available image processing commands.

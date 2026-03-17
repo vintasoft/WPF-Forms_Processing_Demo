@@ -1,7 +1,7 @@
-﻿<Window x:Class="WpfDemosCommonCode.Imaging.OcrLanguagesWindow"
+﻿<Window x:Class="WpfCommonCode.Imaging.OcrLanguagesWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:CustomControls="clr-namespace:WpfDemosCommonCode.Imaging"
+    xmlns:CustomControls="clr-namespace:WpfCommonCode.Imaging"
     Title="OCR Languages" Height="406" Width="276" ResizeMode="NoResize">
     <Grid Margin="3">
         <Grid.RowDefinitions>

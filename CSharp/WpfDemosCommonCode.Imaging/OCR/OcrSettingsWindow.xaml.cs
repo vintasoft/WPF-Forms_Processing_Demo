@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Windows;
 
 using Vintasoft.Imaging.ImageProcessing;
@@ -8,7 +8,7 @@ using Vintasoft.Imaging.Ocr.Tesseract;
 #endif
 
 
-namespace WpfDemosCommonCode.Imaging
+namespace WpfCommonCode.Imaging
 {
     /// <summary>
     /// A window that allows to edit the OCR engine manager settings.

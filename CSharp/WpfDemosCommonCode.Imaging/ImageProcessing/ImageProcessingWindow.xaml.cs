@@ -7,7 +7,7 @@ using Vintasoft.Imaging.ImageProcessing;
 using Vintasoft.Imaging.UI;
 
 
-namespace WpfDemosCommonCode
+namespace WpfCommonCode
 {
     /// <summary>
     /// A form that allows to:

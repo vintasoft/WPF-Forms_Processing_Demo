@@ -9,7 +9,7 @@ using Vintasoft.Imaging.Ocr;
 #endif
 
 
-namespace WpfDemosCommonCode.Imaging
+namespace WpfCommonCode.Imaging
 {
     /// <summary>
     /// A control that allows to change the selected <see cref="Vintasoft.Imaging.Ocr.OcrLanguage"/>.

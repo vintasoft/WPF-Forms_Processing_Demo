@@ -4,7 +4,7 @@ using System.Windows;
 using Vintasoft.Imaging;
 
 
-namespace WpfDemosCommonCode.Imaging
+namespace WpfCommonCode.Imaging
 {
     /// <summary>
     /// Represents the editor of ImagingEnvironment.MaxThreads property.

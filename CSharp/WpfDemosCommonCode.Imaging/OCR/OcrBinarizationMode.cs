@@ -1,4 +1,4 @@
-﻿namespace WpfDemosCommonCode.Imaging
+﻿namespace WpfCommonCode.Imaging
 {
     /// <summary>
     /// Specifies available modes of image binarization.

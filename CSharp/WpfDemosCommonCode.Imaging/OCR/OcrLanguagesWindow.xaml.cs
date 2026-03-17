@@ -7,7 +7,7 @@ using Vintasoft.Imaging.Ocr.Tesseract;
 #endif
 
 
-namespace WpfDemosCommonCode.Imaging
+namespace WpfCommonCode.Imaging
 {
     /// <summary>
     /// A window that allows to edit the language settings of OCR engine manager.

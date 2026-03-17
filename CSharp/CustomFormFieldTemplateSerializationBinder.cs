@@ -1,6 +1,6 @@
 ﻿using System;
 
-using WpfDemosCommonCode;
+using WpfCommonCode;
 
 using Vintasoft.Imaging.FormsProcessing.FormRecognition.Formatters;
 

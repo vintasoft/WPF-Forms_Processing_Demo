@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WpfFormsProcessingDemo.NewTableSetupWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:widcci="clr-namespace:WpfDemosCommonCode.CustomControls"
+    xmlns:widcci="clr-namespace:WpfCommonCode.CustomControls"
     Title="New OMR Mark Table" Height="170" Width="258"
     WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"
     ResizeMode="NoResize">

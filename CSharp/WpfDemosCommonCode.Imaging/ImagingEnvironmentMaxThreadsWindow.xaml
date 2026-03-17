@@ -1,7 +1,7 @@
-﻿<Window x:Class="WpfDemosCommonCode.Imaging.ImagingEnvironmentMaxThreadsWindow"
+﻿<Window x:Class="WpfCommonCode.Imaging.ImagingEnvironmentMaxThreadsWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:userControls="clr-namespace:WpfDemosCommonCode.CustomControls"
+    xmlns:userControls="clr-namespace:WpfCommonCode.CustomControls"
     Title="ImagingEnvironment.MaxThreads property" Height="119" Width="322" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>

@@ -1,7 +1,7 @@
-﻿<UserControl x:Class="WpfDemosCommonCode.ImageProcessingCommandSelectionControl"
+﻿<UserControl x:Class="WpfCommonCode.ImageProcessingCommandSelectionControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ImagingDemosCommonCode="clr-namespace:WpfDemosCommonCode"
+    xmlns:ImagingDemosCommonCode="clr-namespace:WpfCommonCode"
     Height="Auto" Width="Auto"
     MinHeight="290" MinWidth="200">
     <UserControl.Resources>

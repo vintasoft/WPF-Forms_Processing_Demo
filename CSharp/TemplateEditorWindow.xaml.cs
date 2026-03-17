@@ -30,9 +30,9 @@ using Vintasoft.Imaging.Ocr.ML.HandwrittenDigits;
 using Vintasoft.Barcode;
 #endif
 
-using WpfDemosCommonCode;
-using WpfDemosCommonCode.Imaging;
-using WpfDemosCommonCode.Imaging.Codecs;
+using WpfCommonCode;
+using WpfCommonCode.Imaging;
+using WpfCommonCode.Imaging.Codecs;
 using Vintasoft.Imaging.Wpf.UI.VisualTools;
 
 

@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 
 using Vintasoft.Imaging.FormsProcessing.FormRecognition.Omr;
 
-using WpfDemosCommonCode;
+using WpfCommonCode;
 
 
 namespace WpfFormsProcessingDemo

@@ -23,8 +23,8 @@ using Vintasoft.Imaging.Wpf.UI;
 using Vintasoft.Imaging.Wpf.UI.VisualTools;
 using Vintasoft.Imaging.Wpf.UI.VisualTools.GraphicObjects;
 
-using WpfDemosCommonCode;
-using WpfDemosCommonCode.Imaging.Codecs;
+using WpfCommonCode;
+using WpfCommonCode.Imaging.Codecs;
 
 namespace WpfFormsProcessingDemo
 {
@@ -1293,7 +1293,7 @@ namespace WpfFormsProcessingDemo
             binarizationWindow.Owner = this;
 
             // select image from image collection
-            VintasoftImage image = WpfDemosCommonCode.Imaging.SelectImageWindow.SelectImageFromFile(filename);
+            VintasoftImage image = WpfCommonCode.Imaging.SelectImageWindow.SelectImageFromFile(filename);
 
             // if the selected image is null 
             if (image == null)

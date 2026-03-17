@@ -39,11 +39,11 @@ using Vintasoft.Imaging.UI;
 using Vintasoft.Barcode;
 #endif
 
-using WpfDemosCommonCode;
-using WpfDemosCommonCode.Imaging;
-using WpfDemosCommonCode.Imaging.Codecs;
+using WpfCommonCode;
+using WpfCommonCode.Imaging;
+using WpfCommonCode.Imaging.Codecs;
 #if !REMOVE_PDF_PLUGIN
-using WpfDemosCommonCode.Pdf;
+using WpfCommonCode.Pdf;
 #endif
 
 
