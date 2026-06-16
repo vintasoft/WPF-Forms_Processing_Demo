@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 
 #if !REMOVE_OCR_PLUGIN
 using Vintasoft.Imaging.Ocr;
